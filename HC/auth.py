@@ -1,49 +1,44 @@
-from flask import Flask, render_template, request, redirect
-from flask_sqlalchemy import SQLAlchemy
+from flask import Blueprint, request, render_template, url_for, redirect
+from . import db
+from werkzeug.security import generate_password_hash, check_password_hash
+from .main import HostelInfo, Hostel
+from .models import Warden
 
-app = Flask(__name__, static_url_path='', static_folder='static/',)
-app.secret_key = 'super secret key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hosteldata.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+auth = Blueprint('auth', __name__)
 
-# Reset Database
-# with app.app_context():
-#     db.drop_all()
-#     db.create_all()
+@auth.route('/rooms')
+def rooms():
+    return 'Rooms'
 
-class HostelInfo(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    totalhostels = db.Column(db.Integer, nullable=False)
-    boyshostels = db.Column(db.Integer, nullable=False)
-    girlshostels = db.Column(db.Integer, nullable=False)
-    totalstudents = db.Column(db.Integer, nullable=False)
-    totalboys = db.Column(db.Integer, nullable=False)
-    totalgirls = db.Column(db.Integer, nullable=False)
+@auth.route('/signup', methods=['POST', 'GET'])
+def signup():
+    if request.method == 'POST':
+        # code to validate and add user to database goes here
+        email = request.form.get('email')
+        name = request.form.get('name')
+        password = request.form.get('password')
 
-    def __repr__(self):
-        return 'HostelInfo' + str(self.id)
+        user = Warden.query.filter_by(email=email).first() # if this returns a user, then the email already exists in database
 
+        if user: # if a user is found, we want to redirect back to signup page so user can try again
+            return redirect(url_for('auth.signup'))
 
-class Hostel(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    hname = db.Column(db.String(30), nullable=False)
-    warden = db.Column(db.String(30), nullable=False)
-    nrooms = db.Column(db.Integer, nullable=False)
-    noccupied_rooms = db.Column(db.Integer, nullable=False)
-    nstudents = db.Column(db.Integer, nullable=False)
-    fee = db.Column(db.Integer, nullable=False)
-    messfee = db.Column(db.Integer, nullable=False)
+        # create a new user with the form data. Hash the password so the plaintext version isn't saved.
+        new_user = Warden(email=email, name=name, password=generate_password_hash(password, method='sha256'))
 
-    def __repr__(self):
-        return 'Hostel' + str(self.id)
+        # add the new user to the database
+        db.session.add(new_user)
+        db.session.commit()
 
-@app.route('/')
-def index():
-    hostels = Hostel.query.all()
-    return render_template("index.html", hostels=hostels)
+        return redirect(url_for('auth.login'))
+    
+    return render_template('signup.html')
 
-@app.route('/admin')
+@auth.route('/logout')
+def logout():
+    return 'Logout'
+    
+@auth.route('/admin')
 def admin():
     info = HostelInfo.query.get(1)
     hostel_names = Hostel.query.with_entities(Hostel.hname).all()
@@ -55,17 +50,17 @@ def admin():
         
     return render_template("dashboard.html", info=info, hostel_names = hostel_names, current_hostel = "Select a Hostel")
 
-@app.route('/hostels')
+@auth.route('/hostels')
 def hostel():
     hostels = Hostel.query.all()
     return render_template('hostels.html', hostels=hostels)
 
-@app.route('/hostel-info/<int:id>',methods=['GET'])
+@auth.route('/hostel-info/<int:id>',methods=['GET'])
 def abc(id):
     info=Hostel.query.get(id)
     return render_template("k.html",info=info)
 
-@app.route('/hostels/delete/<int:id>', methods=['GET', 'POSTS'])
+@auth.route('/hostels/delete/<int:id>', methods=['GET', 'POSTS'])
 def delete(id):
     hostel = Hostel.query.get_or_404(id)
     info = HostelInfo.query.get(1)
@@ -76,7 +71,7 @@ def delete(id):
     db.session.commit()
     return redirect('/hostels')
 
-@app.route('/add-hostel', methods=['GET', 'POST'])
+@auth.route('/add-hostel', methods=['GET', 'POST'])
 def addhostel():
     if request.method == 'POST':
         info = HostelInfo.query.get(1)
@@ -97,7 +92,7 @@ def addhostel():
     else:
         return render_template('addhostel.html')
 
-@app.route('/register', methods=['GET', 'POST'])
+@auth.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         info = HostelInfo.query.get(1)
@@ -118,7 +113,7 @@ def register():
     else:
         return render_template('register.html')
     
-@app.route('/hostels/edit/<int:id>', methods=['GET', 'POST'])
+@auth.route('/hostels/edit/<int:id>', methods=['GET', 'POST'])
 def update(id):
     info = Hostel.query.get_or_404(id)
     if request.method == 'POST':
@@ -136,7 +131,7 @@ def update(id):
     else:
         return render_template('edit-hostel.html', info=info)
 
-@app.route('/edit-info', methods=['GET', 'POST'])
+@auth.route('/edit-info', methods=['GET', 'POST'])
 def edit():
     info = HostelInfo.query.get_or_404(1)
     if request.method == 'POST':
@@ -150,8 +145,3 @@ def edit():
         return redirect('/admin')
     else:
         return render_template('edit.html', info=info)
-
-if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
-    app.run(debug=True, port='8080')
