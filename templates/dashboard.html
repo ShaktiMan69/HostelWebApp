@@ -24,15 +24,16 @@
 <div class="content">
   <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Select a Hostel
+      {{ current_hostel }}
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       {% for name in hostel_names %}
-        <a class="dropdown-item" href="#">{{ name[0] }}</a>
+        <a class="dropdown-item" href="?hostel={{ name[0] }}">{{ name[0] }}</a>
       {% endfor %}
     </div>
   </div>
 
+    {%if hostel %}
     <div class="row">
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="card card-stats">
@@ -45,8 +46,8 @@
               </div>
               <div class="col-7 col-md-8">
                 <div class="numbers">
-                  <p class="card-category">Total Hostels</p>
-                  <p class="card-title">{{info.totalhostels}}
+                  <p class="card-category">No. Occupied Rooms</p>
+                  <p class="card-title">{{hostel.noccupied_rooms}}
                     <br><br>
                     <p>
                 </div>
@@ -55,7 +56,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-6">
+      <!-- <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="card card-stats">
           <div class="card-body ">
             <div class="row">
@@ -66,8 +67,8 @@
               </div>
               <div class="col-7 col-md-8">
                 <div class="numbers">
-                  <p class="card-category">No. of Boys Hostel</p>
-                  <p class="card-title">{{info.boyshostels}}
+                  <p class="card-category">No. Occupied Rooms</p>
+                  <p class="card-title">{{info.nstudents}}
                     <br><br>
                     <p>
                 </div>
@@ -75,7 +76,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="card card-stats">
           <div class="card-body ">
@@ -87,8 +88,8 @@
               </div>
               <div class="col-7 col-md-8">
                 <div class="numbers">
-                  <p class="card-category">No of Girls Hostel</p>
-                  <p class="card-title">{{info.girlshostels}}
+                  <p class="card-category">Total Rooms</p>
+                  <p class="card-title">{{hostel.nrooms}}
                     <br><br>
                     <p>
                 </div>
@@ -109,7 +110,7 @@
               <div class="col-7 col-md-8">
                 <div class="numbers">
                   <p class="card-category">Total Students</p>
-                  <p class="card-title">{{info.totalstudents}}
+                  <p class="card-title">{{hostel.nstudents}}
                     <br><br>
                     <p>
                 </div>
@@ -119,6 +120,8 @@
         </div>
       </div>
     </div>
+    {% endif %}
+
     <br>
     <a href="/add-hostel"class="btn btn-primary">Add Hostel <i class="fa fa-plus" aria-hidden="true"></i></a>
     <a href="/edit-info" class="btn btn-dark">Edit Info <i class="fa fa-pencil" aria-hidden="true"></i></a>

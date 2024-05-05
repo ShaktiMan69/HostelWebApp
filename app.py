@@ -7,6 +7,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///hosteldata.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+# Reset Database
+# with app.app_context():
+#     db.drop_all()
+#     db.create_all()
 
 class HostelInfo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,6 +30,7 @@ class Hostel(db.Model):
     hname = db.Column(db.String(30), nullable=False)
     warden = db.Column(db.String(30), nullable=False)
     nrooms = db.Column(db.Integer, nullable=False)
+    noccupied_rooms = db.Column(db.Integer, nullable=False)
     nstudents = db.Column(db.Integer, nullable=False)
     fee = db.Column(db.Integer, nullable=False)
     messfee = db.Column(db.Integer, nullable=False)
@@ -42,7 +47,13 @@ def index():
 def admin():
     info = HostelInfo.query.get(1)
     hostel_names = Hostel.query.with_entities(Hostel.hname).all()
-    return render_template("dashboard.html", info=info, hostel_names = hostel_names)
+
+    current_hostel = request.args.get('hostel')
+    if current_hostel:
+        hostel = Hostel.query.where(Hostel.hname == current_hostel).first()
+        return render_template("dashboard.html", info=info, hostel_names = hostel_names, current_hostel = current_hostel, hostel=hostel)
+        
+    return render_template("dashboard.html", info=info, hostel_names = hostel_names, current_hostel = "Select a Hostel")
 
 @app.route('/hostels')
 def hostel():
