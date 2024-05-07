@@ -1,6 +1,7 @@
 from . import db
+from flask_login import UserMixin
 
-class Warden(db.Model):
+class Warden(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True) # primary keys are required by SQLAlchemy
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100), nullable=False)
@@ -29,5 +30,20 @@ class Hostel(db.Model):
     fee = db.Column(db.Integer, nullable=False)
     messfee = db.Column(db.Integer, nullable=False)
 
+class Student(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    address = db.Column(db.String(100), nullable=False)
+    phone = db.Column(db.String(10), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    parent_name = db.Column(db.String(100), nullable=False)
+    parent_phone = db.Column(db.String(10), nullable=False)
+    year = db.Column(db.String(10), nullable=False)
+    semester = db.Column(db.String(100), nullable=False)
+    pr_number = db.Column(db.String(100), nullable=False)
+    department = db.Column(db.String(100), nullable=False)
+    photo = db.Column(db.String(100), nullable=True)
+    id_proof = db.Column(db.String(100), nullable=True)
+
     def __repr__(self):
-        return 'Hostel' + str(self.id)
+        return '<RegistrationData %r>' % self.name
