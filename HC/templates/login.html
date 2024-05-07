@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="masthead">
+    <div class="container px-4 px-lg-5 h-100">
+        <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-8 align-self-end">
+                <h1 class="text-black font-weight-bold">Admin Login</h1>
+                <hr class="divider" />
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                <div class="card">
+                    <div class="card-body">
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="notification is-danger">
+                                    {{ messages[0] }}
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                        <form method="POST" action="/login">
+                            <div class="form-group">
+                                <input class="form-control form-control-lg" type="email" name="email" placeholder="Email" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control form-control-lg" type="password" name="password" placeholder="Password">
+                            </div>
+                            <button class="btn btn-primary btn-block btn-lg" type="submit">Log In</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

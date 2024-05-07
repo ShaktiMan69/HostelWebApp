@@ -1,160 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registration form</title>
-
-  <style>
-    body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #06225c; 
-  }
-  
-  .container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  .page {
-    display: none;
-  }
-  .page.active {
-    display: block;
-  }
-  .button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .slider {
-    width: 100%;
-    background-color: #ddd;
-    margin-bottom: 20px;
-  }
-  .progress {
-    width: 0%;
-    height: 10px;
-    background-color: #007bff;
-  }
-  .input-group {
-    margin-bottom: 10px;
-  }
-  .input-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  .input-group input[type="text"],
-  .input-group input[type="email"],
-  .input-group input[type="tel"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  .input-group input[type="file"] {
-    width: auto;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-  }
-  </style>
-
-</head>
-<body>
-
-<div class="container">
-  <div class="slider">
-    <div class="progress"></div>
+{% extends 'base.html' %}
+{% block content %}
+<link href="assets/css/register.css" rel="stylesheet">
+<div class="rcontainer">
+  <div class="slider tw-rounded-full tw-overflow-hidden">
+    <div
+      class="progress tw-bg-gradient-to-r tw-from-blue-500 tw-via-indigo-600 tw-to-indigo-700 tw-rounded-full tw-transition-all tw-duration-1000 tw-ease-in-out"
+    ></div>
   </div>
-  <form id="registrationForm" action="" method="post">
-    <div class="page active" id="page1">
-      <h2>Personal Information</h2>
+  <form id="registrationForm" method="post" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="page active" id="page0" pageNo="0">
+      <h2 class="tw-text-2xl tw-font-semibold tw-text-center">
+        Personal Information
+      </h2>
       <div class="input-group">
-        <label for="name">Name:</label>       
-        <input type="text" name="name" id="name" placeholder="Enter your name" required>
+        {{ form.name.label }} {{ form.name(class_="form-control") }}
       </div>
-      <br>
+      <br />
       <div class="input-group">
-        <label for="address">Address:</label>
-        <input type="text" name="address" id="address" placeholder="Enter your address" required>
+        {{ form.address.label }} {{ form.address(class_="form-control") }}
       </div>
-      <br>
+      <br />
       <div class="input-group">
-        <label for="phone">Mobile Number:</label>
-        <input type="tel" name="phone" id="phone" placeholder="Enter your mobile number" required>
+        {{ form.distance.label }} {{ form.distance(class_="form-control", min_='0', oninput_="this.value = Math.abs(this.value)") }}
       </div>
-      <br>
+      <br />
       <div class="input-group">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" placeholder="Enter your email" required>
+        {{ form.phone.label }} {{ form.phone(class_="form-control", min_='0', maxlength_="10", oninput_="this.value = Math.abs(this.value)", pattern_="[1-9]{1}[0-9]{9}") }}
       </div>
-      <br>
+      <br />
       <div class="input-group">
-        <label for="parentName">Parent's Name:</label>
-        <input type="text" name="parentName" id="parentName" placeholder="Enter your parent's name" required>
+        {{ form.email.label }} {{ form.email(class_="form-control") }}
       </div>
-      <br>
+      <br />
       <div class="input-group">
-        <label for="parentPhone">Parent's Mobile Number:</label>
-        <input type="tel" name="parentPhone" id="parentPhone" placeholder="Enter your parent's mobile number" required>
+        {{ form.parent_name.label }} {{ form.parent_name(class_="form-control") }}
       </div>
-      <br>
-      <button class="button" onclick="nextPage()">Next</button>
-      
+      <br />
+      <div class="input-group">
+        {{ form.parent_phone.label }} {{ form.parent_phone(class_="form-control", min_='0', maxlength_="10", oninput_="this.value = Math.abs(this.value)", pattern_="[1-9]{1}[0-9]{9}") }}
+      </div>
+      <br />
+      <button
+        type="button"
+        class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br"
+        onclick="nextPage()"
+      >
+        Next
+      </button>
     </div>
-    <div class="page" id="page2">
-      <h2>College Details</h2>
+    <div class="page" id="page1" pageNo="1">
+      <h2 class="tw-text-2xl tw-font-semibold tw-text-center">
+        College Information
+      </h2>
       <div class="input-group">
-        <label for="year">Year:</label>
-        <input type="text" name="year" id="year" placeholder="Enter your year" required>
+        {{ form.year.label }} {{ form.year(class_="form-control") }}
       </div>
-      <br>
+      <br />
       <div class="input-group">
-        <label for="semester">Semester:</label>
-        <input type="text" name="semester" id="semester" placeholder="Enter your semester" required>
+        {{ form.semester.label }} {{ form.semester(class_="form-control") }}
       </div>
-      <br>
+      <br />
       <div class="input-group">
-        <label for="prNumber">PR Number:</label>
-        <input type="text" name="prNumber" id="prNumber" placeholder="Enter your PR number" required>
+        {{ form.pr_number.label }} {{ form.pr_number(class_="form-control") }}
       </div>
-      <br>
+      <br />
       <div class="input-group">
-        <label for="department">Department:</label>
-        <input type="text" name="department" id="department" placeholder="Enter your department" required>
+        {{ form.department.label }} {{ form.department(class_="form-control") }}
       </div>
-      <br>
-      <button class="button" onclick="prevPage()">Previous</button>
-      <button class="button" onclick="nextPage()">Next</button>
+      <br />
+      <div class="input-group">
+        <a style="width: inherit;">
+          {{ form.photo.label }} <br /> {{ form.photo(class_="form-control") }}
+        </a>
+      </div>
+      <br />
+      <div class="input-group">
+        <a style="width: inherit;">
+          {{ form.id_proof.label }} <br /> {{ form.id_proof(class_="form-control") }}
+        </a>
+      </div>
+      <br />
+      <button type="button" onclick="prevPage()" class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br">Previous</button>
+      <button type="button" onclick="nextPage()" class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br">Next</button>
     </div>
-    <div class="page" id="page3">
-      <h2>Upload Photo and ID Proof</h2>
-      <div class="input-group">
-        <label for="photo">Upload Photo:</label>
-        <input type="file" name="photo" id="photo" accept="image/*" required>
-      </div>
-      <br>
-      <div class="input-group">
-        <label for="idProof">Upload ID Proof (PDF):</label>
-        <input type="file" name="idProof" id="idProof" accept=".pdf" required>
-      </div>
-      <br>
-      <button class="button" onclick="prevPage()">Previous</button>
-      <button class="button" onclick="nextPage()">Next</button>
-    </div>
-    <div class="page" id="page4">
+    <!-- Additional pages if needed -->
+    <!-- Submit page -->
+    <div class="page" id="page2" pageNo="2">
       <h2>Review Data</h2>
       <!-- Display entered data -->
       <div class="input-group">
@@ -178,18 +110,18 @@
       </div>
       <br>
       <div class="input-group">
-        <label for="reviewParentName">Parent's Name:</label>
-        <span id="reviewParentName"></span>
+        <label for="reviewParent_name">Parent's Name:</label>
+        <span id="reviewParent_name"></span>
       </div>
       <br>
       <div class="input-group">
-        <label for="reviewParentPhone">Parent's Mobile Number:</label>
-        <span id="reviewParentPhone"></span>
+        <label for="reviewParent_phone">Parent's Mobile Number:</label>
+        <span id="reviewParent_phone"></span>
       </div>
       <br>
       <div class="input-group">
         <label for="reviewYear">Year:</label>
-        <span id="reviewYear"></span>
+        <span id="reviewYear" ></span>
       </div>
       <br>
       <div class="input-group">
@@ -198,8 +130,8 @@
       </div>
       <br>
       <div class="input-group">
-        <label for="reviewprNumber">PR Number:</label>
-        <span id="reviewprNumber"></span>
+        <label for="reviewPr_number">PR Number:</label>
+        <span id="reviewPr_number"></span>
       </div>
       <br>
       <div class="input-group">
@@ -207,104 +139,12 @@
         <span id="reviewDepartment"></span>
       </div>
       <br>
-      <button class="button" onclick="prevPage()">Previous</button>
-      <button class="button" onclick="submitForm()">Submit</button>
+      <!-- Add other review fields here -->
+      <button type='button' class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br" onclick="prevPage()">Previous</button>
+      <button class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br" onclick="submitForm()">Submit</button>
     </div>
   </form>
 </div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-  import { getDatabase,ref,set,get,child } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-database.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDi23Pzs46nmPl-9qie4mISdiLKewnVu0Y",
-    authDomain: "hostel-64708.firebaseapp.com",
-    databaseURL: "https://hostel-64708-default-rtdb.firebaseio.com",
-    projectId: "hostel-64708",
-    storageBucket: "hostel-64708.appspot.com",
-    messagingSenderId: "803639706657",
-    appId: "1:803639706657:web:bd71c0c9619eab76bd8f60",
-    measurementId: "G-R1VG9H07ZR"
-  };
-</script>
-<script>
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-
-  function submitForm() {
-  // Get form data
-  const formData = {
-    name: document.getElementById('name').value,
-    address: document.getElementById('address').value,
-    phone: document.getElementById('phone').value,
-    email: document.getElementById('email').value,
-    parentName: document.getElementById('parentName').value,
-    parentPhone: document.getElementById('parentPhone').value,
-    year: document.getElementById('year').value,
-    semester: document.getElementById('semester').value,
-    rollNumber: document.getElementById('rollNumber').value,
-    department: document.getElementById('department').value,
-    photo: document.getElementById('photo').files[0],
-    idProof: document.getElementById('idProof').files[0],
-  };
-
-    currentPage = 4;
-    showPage(currentPage);
-    updateProgressBar();
-
-  // Save data to Firebase
-  const db = firebase.database();
-  db.ref('registrations').push(formData)
-    .then(() => {
-      alert('Form submitted successfully!');
-      // Reset form after submission if needed
-       document.getElementById('registrationForm').reset();
-    })
-    .catch((error) => {
-      console.error('Error submitting form:', error);
-      alert('An error occurred while submitting the form.');
-    });
-}
-
-</script>
-
-<script>
-  let currentPage = 1;
-  const form = document.getElementById('registrationForm');
-  const progressBar = document.querySelector('.progress');
-
-  function updateProgressBar() {
-    const totalPages = document.querySelectorAll('.page').length;
-    const progress = ((currentPage - 1) / (totalPages - 1)) * 100;
-    progressBar.style.width = progress + '%';
-  }
-
-  function nextPage() {
-    currentPage++;
-    showPage(currentPage);
-    updateProgressBar();
-  }
-
-  function prevPage() {
-    currentPage--;
-    showPage(currentPage);
-    updateProgressBar();
-  }
-
-  function showPage(page) {
-    const pages = document.querySelectorAll('.page');
-    pages.forEach((page, index) => {
-      if (index + 1 === currentPage) {
-        page.classList.add('active');
-      } else {
-        page.classList.remove('active');
-      }
-    });
-  }
-
-</script>
-
-</body>
-</html>
+<script src="assets/js/register.js"></script>
+{% endblock %}
