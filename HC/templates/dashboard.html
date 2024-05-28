@@ -12,7 +12,7 @@
     <li>
       <a href="/hostels">
         <i class="nc-icon nc-bank"></i>
-        <p>Hostel Details</p>
+        <p>Students List</p>
       </a>
     </li>
   </ul>
@@ -22,16 +22,6 @@
 {% block body %}
 
 <div class="content">
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      {{ current_hostel }}
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      {% for name in hostel_names %}
-        <a class="dropdown-item" href="?hostel={{ name[0] }}">{{ name[0] }}</a>
-      {% endfor %}
-    </div>
-  </div>
 
     {%if hostel %}
     <div class="row">
@@ -46,7 +36,7 @@
               </div>
               <div class="col-7 col-md-8">
                 <div class="numbers">
-                  <p class="card-category">No. Occupied Rooms</p>
+                  <p class="card-category">Rooms Occupied</p>
                   <p class="card-title">{{hostel.noccupied_rooms}}
                     <br><br>
                     <p>
@@ -56,27 +46,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="col-lg-3 col-md-6 col-sm-6">
-        <div class="card card-stats">
-          <div class="card-body ">
-            <div class="row">
-              <div class="col-5 col-md-4">
-                <div class="icon-big text-center icon-warning">
-                  <i class="nc-icon nc-single-02 text-success"></i>
-                </div>
-              </div>
-              <div class="col-7 col-md-8">
-                <div class="numbers">
-                  <p class="card-category">No. Occupied Rooms</p>
-                  <p class="card-title">{{info.nstudents}}
-                    <br><br>
-                    <p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="card card-stats">
           <div class="card-body ">
@@ -123,32 +92,7 @@
     {% endif %}
 
     <br>
-    <a href="/add-hostel"class="btn btn-primary">Add Hostel <i class="fa fa-plus" aria-hidden="true"></i></a>
-    <a href="/edit-info" class="btn btn-dark">Edit Info <i class="fa fa-pencil" aria-hidden="true"></i></a>
-    <br>
     <hr>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Total Hostels</th>
-          <th scope="col">No of Boys Hostel</th>
-          <th scope="col">No of Girls Hostel</th>
-          <th scope="col">Total Students</th>
-          <th scope="col">Total Boys</th>
-          <th scope="col">Total Girls</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">{{info.totalhostels}}</th>
-          <td>{{info.boyshostels}}</td>
-          <td>{{info.girlshostels}}</td>
-          <td>{{info.totalstudents}}</td>
-          <td>{{info.totalboys}}</td>
-          <td>{{info.totalgirls}}</td>
-        </tr>
-      </tbody>
-    </table>
   <footer class="footer footer-black  footer-white ">
     <div class="container-fluid">
       <div class="row">
