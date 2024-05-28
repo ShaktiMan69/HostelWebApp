@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+    <style>
+        .btn-details {
+            width: 100px !important;
+            border-radius: 3px;
+        }
+    </style>
+    <!-- main content conatiner -->
+    <div class="container bg-dark text-light my-3 p-2" style="max-width: 700px;">
+        <div class="container text-center p-3">
+            <div class="p-2 d-flex justify-content-between">
+                <div class=""><button type="button" class="btn btn-secondary btn-details">ID-01</button></div>
+                <div class=""><button type="button" class="btn btn-secondary btn-details">Wing-A</button></div>
+            </div>
+            <div class="p-2 d-flex justify-content-between">
+                <div class=""><button type="button" class="btn btn-secondary btn-details">Room 03</button></div>
+                <div class=""><button type="button" class="btn btn-secondary btn-details">Floor-1</button></div>
+            </div>
+        </div>
+
+        <!-- carousel for room images -->
+        <div id="carousel" class="d-flex align-items-center justify-content-center">
+            <!-- previous button for carousel -->
+            <span data-bs-target="#roomCarousel" data-bs-slide="previous">
+                <i class="bi bi-caret-left"style="font-size: 2rem;"></i>
+            </span>
+            <div id="roomCarousel" class="carousel slide mx-4 bg-success my-3 rounded-1">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhh2MzYfi9B6dC3nY60m_7zO6-fzjwHvJEn2OqWotmi3gXt_BVtYD-ncIWcIA85YV-ErwK-ley-18e06oOJlyU3nvbOMA/512fx384f"
+                            class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpoo6m1FBRp3_bGcjhQ08mlhJO0k_jzNKLummJW4NE_iLGVpN-n3Qfs-RFtY2DzIo-TIFM8Ml7Zqwfow7js08W-vprAn3I16T5iuygX9mc8ew/512fx384f"
+                            class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpooru2LhVfyfbdYgJW5Mm4kIWZqPD7N4Tdn2xZ_It12-iSp4r00AGw-xFtZT2gIofAd1c4NVzYq1Lvybrt1JC-vZnMwCFmpGB8spRMR_rC/512fx384f"
+                            class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+            <!-- next button for carousel -->
+            <span data-bs-target="#roomCarousel" data-bs-slide="next">
+                <i class="bi bi-caret-right" style="font-size: 2rem;"></i>
+            </span>
+        </div>
+        <div id="vacancy" class="text-center">
+            <h5>Vacancy : 01</h5>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

@@ -3,7 +3,11 @@ const progressBar = document.querySelector('.progress');
 
 function validateForm() {
     var currentPage = document.querySelector('.page.active');
+<<<<<<< HEAD
+    var inputs = currentPage.querySelectorAll('input[type="text"], input[type="email"], input[type="file"], input[type="number"], select');
+=======
     var inputs = currentPage.querySelectorAll('input[type="text"], input[type="email"], input[type="file"]');
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
     var isValid = true;
 
     if (!(document.getElementById('email').value.indexOf('@') > -1)) {
@@ -20,6 +24,28 @@ function validateForm() {
         }
     });
 
+<<<<<<< HEAD
+    currentPage = currentPage.getAttribute('pageno');
+    if (currentPage === '0') {
+        var selectors = {'#parent_phone': 10, '#phone': 10}
+        var mssg = 'Enter 10 Digit Mobile Numbers Please...';
+    };
+    if (currentPage === '1'){
+        var selectors = {'#pr_number': 9}
+        var mssg = 'Enter 9 Digit PR Number Please...';
+    };
+
+    for (var key in selectors) {
+        if (selectors.hasOwnProperty(key)) {
+          if ($(key).val().length !== selectors[key]) {
+              alert(mssg);
+              return
+          }
+        }
+    };
+
+=======
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
     return isValid;
 }
 
@@ -43,6 +69,27 @@ function nextPage() {
         var nextPage = currentPage.nextElementSibling;
         currentPage.classList.remove('active');
         nextPage.classList.add('active');
+<<<<<<< HEAD
+
+        
+        const photoInput = document.getElementById('photo');
+        const photoPreview = document.getElementById('photo-preview');
+      
+        photoInput.addEventListener('change', function(event) {
+          const file = event.target.files[0];
+          const reader = new FileReader();
+      
+          reader.onload = function(event) {
+            const img = document.createElement('img');
+            img.src = event.target.result;
+            photoPreview.innerHTML = ''; // Clear any previous preview
+            photoPreview.appendChild(img);
+          }
+      
+          reader.readAsDataURL(file);
+        });
+=======
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
     }
     fillReview()
     updateProgressBar();
@@ -66,3 +113,30 @@ function updateProgressBar() {
     const progress = ((currentPage) / (totalPages)) * 100;
     progressBar.style.width = progress + '%';
   }
+<<<<<<< HEAD
+
+function getSemester() {
+    var sem = document.getElementById("year").value;
+    if (sem == "FE") {
+        var items = ["1", "2"];
+    }
+    if (sem == "SE") {
+        var items = ["3", "4"];
+    }
+    if (sem == "TE") {
+        var items = ["5", "6"];
+    }
+    if (sem == "BE") {
+        var items = ["7", "8"];
+    }
+
+    var str = ""
+    for (var item of items) {
+    str += "<option>" + item + "</option>"
+    }
+    document.getElementById("semester").innerHTML = str;
+}
+document.getElementById("year").addEventListener("click", getSemester)
+  
+=======
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
