@@ -12,7 +12,10 @@
                 <ul class="navbar-nav ms-auto my-2 my-lg-0">
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('main.register') }}">Register</a></li>
+<<<<<<< HEAD
+=======
                     <li class="nav-item"><a class="nav-link" href="{{ url_for('main.rooms') }}">Rooms</a></li>
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
                     {% if current_user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{{ url_for('auth.admin') }}">Admin</a></li>
                     {% endif %}
