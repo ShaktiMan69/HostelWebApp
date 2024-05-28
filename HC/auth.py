@@ -2,11 +2,19 @@ from flask import Blueprint, request, render_template, url_for, redirect, flash
 from flask_login import login_user, login_required, current_user, logout_user
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
+<<<<<<< HEAD
 from .models import Warden, Hostel, Student
 
 auth = Blueprint('auth', __name__)
 
 # TODO 
+=======
+from .models import Warden, HostelInfo, Hostel
+
+auth = Blueprint('auth', __name__)
+
+# TODO Adibaba told not to do this
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
 @auth.route('/signup', methods=['POST', 'GET'])
 def signup():
     if request.method == 'POST':
@@ -43,7 +51,10 @@ def login():
 
         # check if the user actually exists
         # take the user-supplied password, hash it, and compare it to the hashed password in the database
+<<<<<<< HEAD
         print(user, user.password, password)
+=======
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
         if not user or not check_password_hash(user.password, password):
             flash('Please check your login details and try again.')
             return redirect(url_for('auth.login')) # if the user doesn't exist or password is wrong, reload the page
@@ -62,6 +73,7 @@ def logout():
 
 
 @login_required
+<<<<<<< HEAD
 @auth.route('/admin')
 def admin():
     if current_user.is_authenticated:
@@ -69,6 +81,20 @@ def admin():
         students = Student.query.where(Student.warden_id == current_user.id).all()
             
         return render_template("dashboard.html", students=students, hostel=hostel_details, current_hostel = "Select a Hostel", current_user = current_user.name)
+=======
+@auth.route('/admin', methods=['GET', 'POST'])
+def admin():
+    if current_user.is_authenticated:
+        info = HostelInfo.query.get(1)
+        hostel_names = Hostel.query.with_entities(Hostel.hname).all()
+
+        current_hostel = request.args.get('hostel')
+        if current_hostel:
+            hostel = Hostel.query.where(Hostel.hname == current_hostel).first()
+            return render_template("dashboard.html", info=info, hostel_names = hostel_names, current_hostel = current_hostel, hostel=hostel, current_user = current_user.name)
+            
+        return render_template("dashboard.html", info=info, hostel_names = hostel_names, current_hostel = "Select a Hostel", current_user = current_user.name)
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
     
     return redirect(url_for('auth.login'))
 

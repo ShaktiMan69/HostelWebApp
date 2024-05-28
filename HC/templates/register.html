@@ -54,11 +54,19 @@
         College Information
       </h2>
       <div class="input-group">
+<<<<<<< HEAD
         {{ form.year.label }} {{ form.year(class_="form-control", style_="width:auto") }}
       </div>
       <br />
       <div class="input-group">
         {{ form.semester.label }} {{ form.semester(class_="form-control", style_="width:auto") }}
+=======
+        {{ form.year.label }} {{ form.year(class_="form-control") }}
+      </div>
+      <br />
+      <div class="input-group">
+        {{ form.semester.label }} {{ form.semester(class_="form-control") }}
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
       </div>
       <br />
       <div class="input-group">
@@ -66,6 +74,7 @@
       </div>
       <br />
       <div class="input-group">
+<<<<<<< HEAD
         {{ form.department.label }} {{ form.department(class_="form-control", style_="width:auto") }}
       </div>
       <br />
@@ -76,6 +85,23 @@
       <div class="input-group">
         {{ form.id_proof.label }} {{ form.id_proof(class_="form-control", accept_=" application/pdf") }}
       </div>
+=======
+        {{ form.department.label }} {{ form.department(class_="form-control") }}
+      </div>
+      <br />
+      <div class="input-group">
+        <a style="width: inherit;">
+          {{ form.photo.label }} <br /> {{ form.photo(class_="form-control") }}
+        </a>
+      </div>
+      <br />
+      <div class="input-group">
+        <a style="width: inherit;">
+          {{ form.id_proof.label }} <br /> {{ form.id_proof(class_="form-control") }}
+        </a>
+      </div>
+      <br />
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
       <button type="button" onclick="prevPage()" class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br">Previous</button>
       <button type="button" onclick="nextPage()" class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br">Next</button>
     </div>

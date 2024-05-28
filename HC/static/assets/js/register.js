@@ -3,7 +3,11 @@ const progressBar = document.querySelector('.progress');
 
 function validateForm() {
     var currentPage = document.querySelector('.page.active');
+<<<<<<< HEAD
     var inputs = currentPage.querySelectorAll('input[type="text"], input[type="email"], input[type="file"], input[type="number"], select');
+=======
+    var inputs = currentPage.querySelectorAll('input[type="text"], input[type="email"], input[type="file"]');
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
     var isValid = true;
 
     if (!(document.getElementById('email').value.indexOf('@') > -1)) {
@@ -20,6 +24,7 @@ function validateForm() {
         }
     });
 
+<<<<<<< HEAD
     currentPage = currentPage.getAttribute('pageno');
     if (currentPage === '0') {
         var selectors = {'#parent_phone': 10, '#phone': 10}
@@ -39,6 +44,8 @@ function validateForm() {
         }
     };
 
+=======
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
     return isValid;
 }
 
@@ -62,6 +69,7 @@ function nextPage() {
         var nextPage = currentPage.nextElementSibling;
         currentPage.classList.remove('active');
         nextPage.classList.add('active');
+<<<<<<< HEAD
 
         
         const photoInput = document.getElementById('photo');
@@ -80,6 +88,8 @@ function nextPage() {
       
           reader.readAsDataURL(file);
         });
+=======
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
     }
     fillReview()
     updateProgressBar();
@@ -103,6 +113,7 @@ function updateProgressBar() {
     const progress = ((currentPage) / (totalPages)) * 100;
     progressBar.style.width = progress + '%';
   }
+<<<<<<< HEAD
 
 function getSemester() {
     var sem = document.getElementById("year").value;
@@ -127,3 +138,5 @@ function getSemester() {
 }
 document.getElementById("year").addEventListener("click", getSemester)
   
+=======
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
