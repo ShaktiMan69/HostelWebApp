@@ -25,6 +25,7 @@ main = Blueprint('main', __name__)
 def index():
     # hostels = Hostel.query.all()
     return render_template("index.html", page_name='Home')
+    return render_template("index.html", page_name='Home')
 
 @main.route('/contactus')
 def contactus():
