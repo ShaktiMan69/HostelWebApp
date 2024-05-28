@@ -1,0 +1,218 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+  * {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "slnt" 0;
+  }
+  .room-btn {
+    width: 50px !important;
+    border-radius: 10px;
+    outline: none;
+    border: 0;
+  }
+  .gender-card:hover {
+    cursor: pointer;
+  }
+</style>
+<div class="container">
+  <div
+    class="container tw-bg-blue-500 tw-rounded-lg px-5 py-3 text-light text-center my-3"
+    style="max-width: 700px"
+  >
+    <h3 class="my-3 tw-text-3xl tw-font-semibold">Rooms</h3>
+    <div
+      class="gender-select tw-gap-5 md:tw-gap-10 tw-flex tw-flex-col md:tw-flex-row md:tw-items-center"
+    >
+      <div
+        id="boys"
+        class="tw-transition-colors tw-duration-300 [&.active]:tw-bg-gradient-to-br tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-green-200 [&.active]:tw-text-white gender-card card col p-5 tw-rounded-lg tw-font-semibold tw-text-xl"
+      >
+        BOYS HOSTEL
+      </div>
+      <div
+        id="girls"
+        class="tw-transition-colors tw-duration-300 [&.active]:tw-bg-gradient-to-br tw-from-pink-500 tw-via-pink-600 tw-to-pink-700 [&.active]:tw-text-white gender-card card col p-5 tw-rounded-lg tw-font-semibold tw-text-xl"
+      >
+        GIRLS HOSTEL
+      </div>
+    </div>
+    <div id="drops" class="mt-4">
+      <div id="floor" class="mb-2 form-floating">
+        <select class="form-select" aria-label="Default select example">
+          <option value="1">Floor-0</option>
+          <option value="2">Floor-1</option>
+        </select>
+        <label class="text-dark" for="floor">Select Floor</label>
+      </div>
+      <div id="id-boys" class="mb-2 form-floating" style="display: none">
+        <select class="form-select" aria-label="Default select example">
+          <option value="1">ID1</option>
+          <option value="2">ID2</option>
+          <option value="3">ID3</option>
+        </select>
+        <label class="text-dark" for="floor">Select ID</label>
+      </div>
+      <div id="id-girls" class="mb-2 form-floating" style="display: none">
+        <select class="form-select" aria-label="Default select example">
+          <option value="1">ID4</option>
+        </select>
+        <label class="text-dark" for="floor">Select ID</label>
+      </div>
+      <div id="wing" class="form-floating" style="display: none">
+        <select class="form-select" aria-label="Default select example">
+          <option value="1">Wing-A</option>
+          <option value="1">Wing-B</option>
+        </select>
+        <label class="text-dark" for="wing">Select Wing</label>
+      </div>
+    </div>
+  </div>
+  <div
+    class="container tw-bg-gray-300 tw-rounded-lg p-2 text-light text-center"
+    style="max-width: 700px"
+  >
+    <div class="container text-center">
+      <div class="row row-cols-4 p-2">
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            1
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            2
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            3
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            4
+          </button>
+        </div>
+      </div>
+      <div class="row row-cols-4 p-2">
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+            disabled
+          >
+            5
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            6
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            7
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            8
+          </button>
+        </div>
+      </div>
+      <div class="row row-cols-4 p-2">
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            9
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            10
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            11
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            12
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+  crossorigin="anonymous"
+></script>
+<script>
+  let showWing = document.getElementById("wing");
+  let girls = document.getElementById("girls");
+  let boys = document.getElementById("boys");
+  let idBoys = document.getElementById("id-boys");
+  let idGirls = document.getElementById("id-girls");
+  girls.addEventListener("click", () => {
+    showWing.style.display = "block";
+    idBoys.style.display = "none";
+    idGirls.style.display = "block";
+
+    // girls.style.backgroundColor = "orchid";
+    // boys.style.backgroundColor = "white";
+    girls.classList.add("active");
+    boys.classList.remove("active");
+  });
+  boys.addEventListener("click", () => {
+    showWing.style.display = "none";
+    idGirls.style.display = "none";
+    idBoys.style.display = "block";
+
+    // girls.style.backgroundColor = "white";
+    // boys.style.backgroundColor = "mediumspringgreen";
+    girls.classList.remove("active");
+    boys.classList.add("active");
+  });
+</script>
+{% endblock %}
