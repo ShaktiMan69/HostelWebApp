@@ -6,6 +6,14 @@
     <div
       class="progress tw-bg-gradient-to-r tw-from-blue-500 tw-via-indigo-600 tw-to-indigo-700 tw-rounded-full tw-transition-all tw-duration-1000 tw-ease-in-out"
     ></div>
+{% extends 'base.html' %}
+{% block content %}
+<link href="assets/css/register.css" rel="stylesheet">
+<div class="rcontainer">
+  <div class="slider tw-rounded-full tw-overflow-hidden">
+    <div
+      class="progress tw-bg-gradient-to-r tw-from-blue-500 tw-via-indigo-600 tw-to-indigo-700 tw-rounded-full tw-transition-all tw-duration-1000 tw-ease-in-out"
+    ></div>
   </div>
   <form id="registrationForm" method="post" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
@@ -21,21 +29,26 @@
         {{ form.address.label }} {{ form.address(class_="form-control") }}
       </div>
       <br />
+      <br />
       <div class="input-group">
         {{ form.distance.label }} {{ form.distance(class_="form-control", min_='0', oninput_="this.value = Math.abs(this.value)") }}
       </div>
+      <br />
       <br />
       <div class="input-group">
         {{ form.phone.label }} {{ form.phone(class_="form-control", min_='0', maxlength_="10", oninput_="this.value = Math.abs(this.value)", pattern_="[1-9]{1}[0-9]{9}") }}
       </div>
       <br />
+      <br />
       <div class="input-group">
         {{ form.email.label }} {{ form.email(class_="form-control") }}
       </div>
       <br />
+      <br />
       <div class="input-group">
         {{ form.parent_name.label }} {{ form.parent_name(class_="form-control") }}
       </div>
+      <br />
       <br />
       <div class="input-group">
         {{ form.parent_phone.label }} {{ form.parent_phone(class_="form-control", min_='0', maxlength_="10", oninput_="this.value = Math.abs(this.value)", pattern_="[1-9]{1}[0-9]{9}") }}
@@ -82,6 +95,7 @@
         {{ form.photo.label }} {{ form.photo(class_="form-control", accept_="image/png, image/jpeg") }}
       </div>
       <br />
+      <br />
       <div class="input-group">
         {{ form.id_proof.label }} {{ form.id_proof(class_="form-control", accept_=" application/pdf") }}
       </div>
@@ -95,6 +109,7 @@
         </a>
       </div>
       <br />
+      <br />
       <div class="input-group">
         <a style="width: inherit;">
           {{ form.id_proof.label }} <br /> {{ form.id_proof(class_="form-control") }}
@@ -105,6 +120,9 @@
       <button type="button" onclick="prevPage()" class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br">Previous</button>
       <button type="button" onclick="nextPage()" class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br">Next</button>
     </div>
+    <!-- Additional pages if needed -->
+    <!-- Submit page -->
+    <div class="page" id="page2" pageNo="2">
     <!-- Additional pages if needed -->
     <!-- Submit page -->
     <div class="page" id="page2" pageNo="2">
@@ -138,15 +156,20 @@
       <div class="input-group">
         <label for="reviewParent_name">Parent's Name:</label>
         <span id="reviewParent_name"></span>
+        <label for="reviewParent_name">Parent's Name:</label>
+        <span id="reviewParent_name"></span>
       </div>
       <br>
       <div class="input-group">
+        <label for="reviewParent_phone">Parent's Mobile Number:</label>
+        <span id="reviewParent_phone"></span>
         <label for="reviewParent_phone">Parent's Mobile Number:</label>
         <span id="reviewParent_phone"></span>
       </div>
       <br>
       <div class="input-group">
         <label for="reviewYear">Year:</label>
+        <span id="reviewYear" ></span>
         <span id="reviewYear" ></span>
       </div>
       <br>
@@ -156,6 +179,8 @@
       </div>
       <br>
       <div class="input-group">
+        <label for="reviewPr_number">PR Number:</label>
+        <span id="reviewPr_number"></span>
         <label for="reviewPr_number">PR Number:</label>
         <span id="reviewPr_number"></span>
       </div>
@@ -168,9 +193,15 @@
       <!-- Add other review fields here -->
       <button type='button' class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br" onclick="prevPage()">Previous</button>
       <button class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br" onclick="submitForm()">Submit</button>
+      <!-- Add other review fields here -->
+      <button type='button' class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br" onclick="prevPage()">Previous</button>
+      <button class="button tw-bg-gradient-to-r tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br" onclick="submitForm()">Submit</button>
     </div>
   </form>
 </div>
+
+<script src="assets/js/register.js"></script>
+{% endblock %}
 
 <script src="assets/js/register.js"></script>
 {% endblock %}

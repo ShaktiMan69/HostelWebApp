@@ -6,6 +6,9 @@ from pathlib import Path
 import os
 =======
 >>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
+from flask_login import LoginManager
+from pathlib import Path
+import os
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
@@ -17,6 +20,10 @@ Path(UPLOAD_FOLDER).mkdir(parents=True, exist_ok=True)
 =======
 UPLOAD_FOLDER = r'H:\YK\Flask\uploads'  # Define the upload folder
 >>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
+ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'} 
+UPLOAD_FOLDER = os.getcwd() + r'\uploads'  # Define the upload folder
+Path(UPLOAD_FOLDER).mkdir(parents=True, exist_ok=True)
+
 
 def create_app():
     app = Flask(__name__, static_url_path='', static_folder='static/',)
@@ -26,7 +33,21 @@ def create_app():
 
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
     db.init_app(app)
+
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
+
+    from .models import Warden
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        # since the user_id is just the primary key of our user table, use it in the query for the user
+        return Warden.query.get(int(user_id))
+    
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
@@ -59,3 +80,11 @@ def allowed_file(filename):
 =======
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 >>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
+
+
+# Helper function to check allowed file extensions
+def allowed_file(filename):
+    return True# TODO
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+

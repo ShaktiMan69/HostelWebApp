@@ -1,5 +1,7 @@
 from flask import Blueprint, request, render_template, url_for, redirect, flash
 from flask_login import login_user, login_required, current_user, logout_user
+from flask import Blueprint, request, render_template, url_for, redirect, flash
+from flask_login import login_user, login_required, current_user, logout_user
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 <<<<<<< HEAD
@@ -67,6 +69,7 @@ def login():
 
 @auth.route('/logout')
 @login_required
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
@@ -103,6 +106,7 @@ def admin():
 def hostel():
     hostels = Hostel.query.all()
     return render_template('hostels.html', hostels=hostels, current_user = current_user.name)
+    return render_template('hostels.html', hostels=hostels, current_user = current_user.name)
 
 @auth.route('/hostel-info/<int:id>',methods=['GET'])
 def abc(id):
@@ -120,6 +124,27 @@ def delete(id):
     db.session.commit()
     return redirect('/hostels')
 
+
+# @auth.route('/register', methods=['GET', 'POST'])
+# def register():
+#     if request.method == 'POST':
+#         info = HostelInfo.query.get(1)
+#         info.totalhostels = info.totalhostels + 1
+#         info.boyshostels = info.boyshostels + 1
+#         hname = request.form['hname']
+#         warden = request.form['warden']
+#         nrooms = request.form['nrooms']
+#         nstudents = request.form['nstudents']
+#         info.totalstudents += int(nstudents)
+#         fee = request.form['fee']
+#         messfee = request.form['messfee']
+#         new_hostel = Hostel(hname=hname, warden=warden, nrooms=nrooms,
+#                             nstudents=nstudents, fee=fee, messfee=messfee)
+#         db.session.add(new_hostel)
+#         db.session.commit()
+#         return redirect('/admin')
+#     else:
+#         return render_template('register.html')
 
 # @auth.route('/register', methods=['GET', 'POST'])
 # def register():
@@ -170,4 +195,5 @@ def edit():
         db.session.commit()
         return redirect('/admin')
     else:
+        return render_template('edit.html', info=info, current_user=current_user.name)
         return render_template('edit.html', info=info, current_user=current_user.name)
