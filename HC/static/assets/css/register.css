@@ -40,7 +40,10 @@ body {
   }
   .input-group {
     margin-bottom: 10px;
+<<<<<<< HEAD
     flex-direction: column;
+=======
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
   }
   .input-group label {
     display: block;
@@ -50,9 +53,20 @@ body {
   .input-group input[type="text"],
   .input-group input[type="email"],
   .input-group input[type="tel"],
+<<<<<<< HEAD
   .input-group input[type="file"],
   .input-group input[type="number"] {
     width: auto;
+=======
+  .input-group input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  .input-group input[type="file"] {
+>>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
