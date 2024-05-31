@@ -5,6 +5,9 @@ from .forms import RegistrationForm
 import os
 from .models import Student
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash
+from RandomWordGenerator import RandomWord
+rw = RandomWord(max_word_size=16, constant_word_size=True, include_digits=True)
 
 # Reset Database
 # with app.app_context():
@@ -64,6 +67,7 @@ def register():
             address = form.address.data
             phone = form.phone.data
             email = form.email.data
+            password = form.password.data
             parent_name = form.parent_name.data
             parent_phone = form.parent_phone.data
             year = form.year.data
@@ -75,14 +79,14 @@ def register():
             path_id_proof = save_file(form.id_proof.name, pr_number=pr_number)
 
             # Save the data to the database
-            registration_data = Student(warden_id='', hostel_id='', room_num='', name=name, address=address, phone=phone, email=email,
+            registration_data = Student(warden_id='', hostel_id='', room_num='', password=generate_password_hash(password),name=name, address=address, phone=phone, email=email,
                                                 parent_name=parent_name, parent_phone=parent_phone, year=year,
                                                 semester=semester, pr_number=pr_number, department=department,
                                                 photo=path_photo, id_proof=path_id_proof)
             db.session.add(registration_data)
             db.session.commit()
 
-            return 'Registered Successfully'
+            return f'Registered Successfully | Use the Email {email} and Password {password} for the app'
         return 'Something Broke'
     return render_template('register.html', form=form, page_name='Register')
 

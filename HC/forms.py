@@ -10,6 +10,7 @@ class RegistrationForm(FlaskForm):
     distance = IntegerField('Distance (KM)', validators=[InputRequired()])
     phone = IntegerField('Mobile Number', validators=[InputRequired()])
     email = EmailField('Email', validators=[InputRequired(), Email()])
+    password = StringField('Password', validators=[InputRequired()])
     parent_name = StringField("Parent's Name", validators=[InputRequired()])
     parent_phone = IntegerField("Parent's Mobile Number", validators=[InputRequired()])
     # Page 2

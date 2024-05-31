@@ -26,6 +26,7 @@ class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     warden_id = db.Column(db.Integer, nullable=False)
     hostel_id = db.Column(db.Integer, nullable=False)
+    password = db.Column(db.Integer, nullable=False)
     room_num = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String(100), nullable=False)
     address = db.Column(db.String(100), nullable=False)
