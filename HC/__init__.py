@@ -1,29 +1,19 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-<<<<<<< HEAD
 from pathlib import Path
 import os
-=======
->>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
 from flask_login import LoginManager
 from pathlib import Path
 import os
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
-ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'} 
-<<<<<<< HEAD
+
 UPLOAD_FOLDER = os.getcwd() + r'\uploads'  # Define the upload folder
 Path(UPLOAD_FOLDER).mkdir(parents=True, exist_ok=True)
 
-=======
-UPLOAD_FOLDER = r'H:\YK\Flask\uploads'  # Define the upload folder
->>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'} 
-UPLOAD_FOLDER = os.getcwd() + r'\uploads'  # Define the upload folder
-Path(UPLOAD_FOLDER).mkdir(parents=True, exist_ok=True)
-
 
 def create_app():
     app = Flask(__name__, static_url_path='', static_folder='static/',)
@@ -72,19 +62,6 @@ def create_app():
 
 # Helper function to check allowed file extensions
 def allowed_file(filename):
-<<<<<<< HEAD
     return True# TODO
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-=======
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
->>>>>>> 34d7ed92a3dc20b0641120eeda956b3602ff9742
-
-
-# Helper function to check allowed file extensions
-def allowed_file(filename):
-    return True# TODO
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 
