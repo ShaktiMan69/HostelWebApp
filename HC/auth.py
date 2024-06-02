@@ -75,70 +75,17 @@ def admin():
     return redirect(url_for('auth.login'))
 
 
-@auth.route('/hostels')
+@auth.route('/students')
 def hostel():
     hostels = Hostel.query.all()
-    return render_template('hostels.html', hostels=hostels, current_user = current_user.name)
-    return render_template('hostels.html', hostels=hostels, current_user = current_user.name)
-
-@auth.route('/hostel-info/<int:id>',methods=['GET'])
-def abc(id):
-    info=Hostel.query.get(id)
-    return render_template("k.html",info=info)
+    return render_template('stdlist.html', hostels=hostels, current_user = current_user.name)
 
 @auth.route('/hostels/delete/<int:id>', methods=['GET', 'POSTS'])
 def delete(id):
     hostel = Hostel.query.get_or_404(id)
-    info = HostelInfo.query.get(1)
-    info.totalhostels = info.totalhostels - 1
-    info.boyshostels = info.boyshostels - 1
-    info.totalstudents -= int(hostel.nstudents)
     db.session.delete(hostel)
     db.session.commit()
     return redirect('/hostels')
-
-
-# @auth.route('/register', methods=['GET', 'POST'])
-# def register():
-#     if request.method == 'POST':
-#         info = HostelInfo.query.get(1)
-#         info.totalhostels = info.totalhostels + 1
-#         info.boyshostels = info.boyshostels + 1
-#         hname = request.form['hname']
-#         warden = request.form['warden']
-#         nrooms = request.form['nrooms']
-#         nstudents = request.form['nstudents']
-#         info.totalstudents += int(nstudents)
-#         fee = request.form['fee']
-#         messfee = request.form['messfee']
-#         new_hostel = Hostel(hname=hname, warden=warden, nrooms=nrooms,
-#                             nstudents=nstudents, fee=fee, messfee=messfee)
-#         db.session.add(new_hostel)
-#         db.session.commit()
-#         return redirect('/admin')
-#     else:
-#         return render_template('register.html')
-
-# @auth.route('/register', methods=['GET', 'POST'])
-# def register():
-#     if request.method == 'POST':
-#         info = HostelInfo.query.get(1)
-#         info.totalhostels = info.totalhostels + 1
-#         info.boyshostels = info.boyshostels + 1
-#         hname = request.form['hname']
-#         warden = request.form['warden']
-#         nrooms = request.form['nrooms']
-#         nstudents = request.form['nstudents']
-#         info.totalstudents += int(nstudents)
-#         fee = request.form['fee']
-#         messfee = request.form['messfee']
-#         new_hostel = Hostel(hname=hname, warden=warden, nrooms=nrooms,
-#                             nstudents=nstudents, fee=fee, messfee=messfee)
-#         db.session.add(new_hostel)
-#         db.session.commit()
-#         return redirect('/admin')
-#     else:
-#         return render_template('register.html')
     
 @auth.route('/hostels/edit/<int:id>', methods=['GET', 'POST'])
 def update(id):
@@ -155,17 +102,3 @@ def update(id):
     else:
         return render_template('edit-hostel.html', info=info)
 
-@auth.route('/edit-info', methods=['GET', 'POST'])
-def edit():
-    info = HostelInfo.query.get_or_404(1)
-    if request.method == 'POST':
-        info.totalhostels = request.form['totalhostels']
-        info.boyshostels = request.form['boyshostels']
-        info.girlshostels = request.form['girlshostels']
-        info.totalstudents = request.form['totalstudents']
-        info.totalboys = request.form['totalboys']
-        info.totalgirls = request.form['totalgirls']
-        db.session.commit()
-        return redirect('/admin')
-    else:
-        return render_template('edit.html', info=info, current_user=current_user.name)

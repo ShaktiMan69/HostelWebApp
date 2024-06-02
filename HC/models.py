@@ -8,7 +8,7 @@ class Warden(UserMixin, db.Model):
     name = db.Column(db.String(1000), nullable=False)
 
     def __repr__(self):
-        return f"Warden {self.id} {self.email} {self.passoword} {self.name}"
+        return f"Warden {self.id} {self.email} {self.password} {self.name}"
 
 class Hostel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
