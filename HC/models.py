@@ -14,13 +14,16 @@ class Hostel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     warden_id = db.Column(db.Integer, nullable=False)
     hostel_id = db.Column(db.Integer, nullable=False)
-    hname = db.Column(db.String(30), nullable=False)
+    floor_num = db.Column(db.Integer, nullable=False)
     nrooms = db.Column(db.Integer, nullable=False)
     noccupied_rooms = db.Column(db.Integer, nullable=False)
     nstudents = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
-        return f"Hostel {self.id} {self.warden_id} {self.hostel_id} {self.hname} {self.nrooms} {self.noccupied_rooms} {self.nstudents}"
+        return f"Hostel {self.id} {self.warden_id} {self.hostel_id} {self.nrooms} {self.noccupied_rooms} {self.nstudents}"
+    
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)

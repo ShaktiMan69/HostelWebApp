@@ -10,7 +10,7 @@
       </a>
     </li>
     <li class="active ">
-      <a href="/hostels">
+      <a href="/students">
         <i class="nc-icon nc-bank"></i>
         <p>Students List</p>
       </a>
@@ -30,16 +30,20 @@
         <thead class="thead-dark">
           <tr>
             <th scope="col">Name</th>
-            <th scope="col">Warden</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Department</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
-        {% for hostel in hostels%}
+        {% for student in students%}
             <tr>
-            <td>{{hostel.hname}}</td>
-            <td>{{hostel.warden}}</td>
-            <td><a  href="/hostels/edit/{{hostel.id}}" class="btn btn-primary btn-small">Edit <i class="fa fa-pencil" aria-hidden="true"></i></a> <a href="/hostels/delete/{{hostel.id}}" class="btn btn-danger btn-small">Delete <i class="fa fa-times" aria-hidden="true"></i></a></td>
+            <td>{{student.name}}</td>
+            <td>{{student.email}}</td>
+            <td>{{student.phone}}</td>
+            <td>{{student.department}}</td>
+            <td><a  href="/student/edit/{{student.id}}" class="btn btn-primary btn-small">Edit <i class="fa fa-pencil" aria-hidden="true"></i></a> <a href="/student/delete/{{student.id}}" class="btn btn-danger btn-small">Delete <i class="fa fa-times" aria-hidden="true"></i></a></td>
             </tr>
         {% endfor %}
         </tbody>

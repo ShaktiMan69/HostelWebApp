@@ -57,7 +57,6 @@ def login():
 
 @auth.route('/logout')
 @login_required
-@login_required
 def logout():
     logout_user()
     return redirect(url_for('main.index'))
@@ -70,35 +69,53 @@ def admin():
         hostel_details = Hostel.query.where(Hostel.warden_id == current_user.id).first() # only show the assigned hostel details to the assigned warden
         students = Student.query.where(Student.warden_id == current_user.id).all()
             
-        return render_template("dashboard.html", students=students, hostel=hostel_details, current_hostel = "Select a Hostel", current_user = current_user.name)
+        return render_template("dashboard.html", students=students, hostel=hostel_details, current_user = current_user.name)
     
     return redirect(url_for('auth.login'))
 
 
+@login_required
 @auth.route('/students')
 def hostel():
-    hostels = Hostel.query.all()
-    return render_template('stdlist.html', hostels=hostels, current_user = current_user.name)
-
-@auth.route('/hostels/delete/<int:id>', methods=['GET', 'POSTS'])
-def delete(id):
-    hostel = Hostel.query.get_or_404(id)
-    db.session.delete(hostel)
-    db.session.commit()
-    return redirect('/hostels')
+    if current_user.is_authenticated:
+        students = Student.query.all()
+        return render_template('stdlist.html', students=students, current_user=current_user.name)
     
-@auth.route('/hostels/edit/<int:id>', methods=['GET', 'POST'])
-def update(id):
-    info = Hostel.query.get_or_404(id)
-    if request.method == 'POST':
-        info.hname = request.form['hname']
-        info.warden = request.form['warden']
-        info.nrooms = request.form['nrooms']
-        info.nstudents = request.form['nstudents']
-        info.fee = request.form['fee']
-        info.messfee = request.form['messfee']
-        db.session.commit()
-        return redirect('/hostels')
-    else:
-        return render_template('edit-hostel.html', info=info)
+    return redirect(url_for('auth.login'))
 
+@login_required
+@auth.route('/student/delete/<int:id>', methods=['GET', 'POST'])
+def delete(id):
+    if current_user.is_authenticated:
+        student = Student.query.get_or_404(id)
+        db.session.delete(student)
+        db.session.commit()
+        return redirect('/students')
+    return redirect(url_for('auth.login'))
+    
+@login_required
+@auth.route('/student/edit/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    if current_user.is_authenticated:
+        info = Student.query.get_or_404(id)
+        if request.method == 'POST':
+            info.warden_id = request.form['warden_id']
+            info.hostel_id = request.form['hostel_id']
+            info.password = request.form['password']
+            info.room_num = request.form['room_num']
+            info.name = request.form['name']
+            info.address = request.form['address']
+            info.phone = request.form['phone']
+            info.email = request.form['email']
+            info.parent_name = request.form['parent_name']
+            info.parent_phone = request.form['parent_phone']
+            info.year = request.form['year']
+            info.semester = request.form['semester']
+            info.pr_number = request.form['pr_number']
+            info.department = request.form['department']
+            db.session.commit()
+            return redirect('/students')
+        else:
+            return render_template('edit-student.html', info=info, current_user=current_user.name)
+        
+    return redirect(url_for('auth.login'))
