@@ -126,4 +126,3 @@ function getSemester() {
     document.getElementById("semester").innerHTML = str;
 }
 document.getElementById("year").addEventListener("click", getSemester)
-  

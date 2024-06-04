@@ -1,3 +1,5 @@
 uploads/*
 instance/*
 .gitignore
+HC/static/assets/img/rooms/*
+HC/static/assets/img/rooom/*

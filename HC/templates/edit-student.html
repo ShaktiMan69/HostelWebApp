@@ -25,44 +25,13 @@
 <form action = '/student/edit/{{info.id}}' method='POST' style="padding-left: 4em;padding-right: 4em;padding-bottom: 4em;padding-top: 0em;">
     <center><h4>Edit {{info.name}}'s Details</h4></center>
     <hr>
-    <div class="form-group"></div>
-    <label for="hname">Name :</label>
-    <input class="form-control" type="text" name="name" id="name" value="{{info.name}}">
-    <br>
-    <label for="warden_id">Warden ID :</label>
-    <input class="form-control" type="text" name="warden_id" id="warden_id" value="{{info.warden_id}}" rows=4>
-    <br>
-    <label for="hostel_id">Hostel ID :</label>
-    <input class="form-control" type="text" name="hostel_id" id="hostel_id" value="{{info.hostel_id}}" rows=4>
-    <br>
-    <label for="room_num">Room Number :</label>
-    <input class="form-control" type="text" name="room_num" id="room_num" value="{{info.room_num}}">
-    <br>
-    <label for="address">Address :</label>
-    <input class="form-control" type="text" name="address" id="address" value="{{info.address}}">
-    <br>
-    <label for="phone">Phone :</label>
-    <input class="form-control" type="text" name="phone" id="phone" value="{{info.phone}}">
-    <br>
-    <label for="email">Email :</label>
-    <input class="form-control" type="text" name="email" id="email" value="{{info.email}}">
-    <br>
-    <label for="parent_name">Parents Name :</label>
-    <input class="form-control" type="text" name="parent_name" id="parent_name" value="{{info.parent_name}}">
-    <br>
-    <label for="parent_phone">Parents Phone :</label>
-    <input class="form-control" type="text" name="parent_phone" id="parent_phone" value="{{info.parent_phone}}">
-    <br>
     <label for="year">Year :</label>
     <input class="form-control" type="text" name="year" id="year" value="{{info.year}}">
     <br>
     <label for="semester">Semester :</label>
     <input class="form-control" type="text" name="semester" id="semester" value="{{info.semester}}">
     <br>
-    <label for="pr_number">PR Number :</label>
-    <input class="form-control" type="text" name="pr_number" id="pr_number" value="{{info.pr_number}}">
-    <br>
-    <label for="department">Department:</label>
+    <label for="department">Department :</label>
     <input class="form-control" type="text" name="department" id="department" value="{{info.department}}">
     <br>
     <input type="submit" value="Update Hostel Info" class="btn btn-primary">

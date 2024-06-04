@@ -3,7 +3,7 @@ from flask import Flask, flash, render_template, request, redirect, Blueprint, u
 from . import db, allowed_file, UPLOAD_FOLDER
 from .forms import RegistrationForm
 import os
-from .models import Student
+from .models import Student, Hostel
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash
 from RandomWordGenerator import RandomWord
@@ -28,7 +28,13 @@ def contactus():
 
 @main.route('/rooms')
 def rooms():
-    return render_template('rooms.html', page_name='Rooms')
+    rooms_info = [x[0] for x in Hostel.query.with_entities(Hostel.noccupied_rooms).all()]
+    return render_template('rooms.html', page_name='Rooms', rooms_info=rooms_info)
+
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
 
 # Helper function to save files
 def save_file(file_field, pr_number):
