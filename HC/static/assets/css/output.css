@@ -893,6 +893,11 @@ video {
   background-color: rgb(187 247 208 / var(--tw-bg-opacity));
 }
 
+.hover\:tw-bg-pink-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 142 198 / var(--tw-bg-opacity));
+}
+
 .hover\:tw-bg-gradient-to-br:hover {
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
