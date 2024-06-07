@@ -54,9 +54,15 @@
 </style>
 <script>
 
-function createTable(tableData) {
+function createTable(tableData, containerId) {
+  const gridContainer = document.getElementById(containerId);
+  gridContainer.innerHTML = ""; // Clear any previous content
+
   var table = document.createElement('table');
+  gridContainer.appendChild(table);
+  
   var tableBody = document.createElement('tbody');
+  table.appendChild(tableBody)
 
   tableData.forEach(function(rowData) {
     var row = document.createElement('tr');
@@ -75,7 +81,7 @@ function createTable(tableData) {
 }
 
 
-function createGrid(cellsList, containerId) {
+function createGrid(rows, columns, containerId) {
     const gridContainer = document.getElementById(containerId);
     gridContainer.innerHTML = ""; // Clear any previous content
   
@@ -158,26 +164,23 @@ function createGrid(cellsList, containerId) {
 
       <div id="id-boys" class="mb-2 form-floating" style="display: none">
         <select class="form-select" aria-label="Boys Hostel Room">
-          <option value="0"></option>
-          <option value="1">ID1</option>
+          <option value="0">ID1</option>
           <option value="2">ID2</option>
-          <option value="3">ID3</option>
+          <option value="4">ID3</option>
         </select>
         <label class="text-dark" for="floor">Select ID</label>
       </div>
       <div id="id-girls" class="mb-2 form-floating" style="display: none">
         <select class="form-select" aria-label="Girls Hostel Room">
-          <option value="0"></option>
-          <option value="4">ID4</option>
-          <option value="5">ID5</option>
+          <option value="6">ID4</option>
+          <option value="8">ID5</option>
         </select>
         <label class="text-dark" for="floor">Select ID</label>
       </div>
       <div id="floor" class="mb-2 form-floating"  style="display: none">
         <select class="form-select" aria-label="Select Floor">
-          <option value="0"></option>
-          <option value="1">Floor-0</option>
-          <option value="2">Floor-1</option>
+          <option value="0">Ground Floor</option>
+          <option value="1">First Floor</option>
         </select>
         <label class="text-dark" for="floor">Select Floor</label>
       </div>
@@ -314,6 +317,8 @@ function createGrid(cellsList, containerId) {
   let rooms = {{ rooms_info }}
   let numCells = 0;
 
+  let borg = null;
+
   function listToMatrix(list, elementsPerSubArray) {
       var matrix = [], i, k;
 
@@ -331,16 +336,16 @@ function createGrid(cellsList, containerId) {
 
 
   function range(n){
-    return [...Array(5).keys()]
+    return [...Array(n).keys()]
   }
 
   girls.addEventListener("click", () => {
+    borg = 'g';
     idBoys.style.display = "none";
     idGirls.style.display = "inherit";
     floor.style.display = "inherit";
     getBtn.style.display = 'inherit';
 
-    numCells = rooms[idGirls.getElementsByClassName('form-select')[0].value]
     // girls.style.backgroundColor = "orchid";
     // boys.style.backgroundColor = "white";
     girls.classList.add("active");
@@ -348,26 +353,38 @@ function createGrid(cellsList, containerId) {
   });
 
   boys.addEventListener("click", () => {
+    borg = 'b';
     idGirls.style.display = "none";
     idBoys.style.display = "inherit";
     floor.style.display = "inherit";
     getBtn.style.display = 'inherit';
 
-    numCells = rooms[idBoys.getElementsByClassName('form-select')[0].value]
     // girls.style.backgroundColor = "white";
     // boys.style.backgroundColor = "mediumspringgreen";
     girls.classList.remove("active");
     boys.classList.add("active");
   });
 
+
   getBtn.addEventListener("click", () => {
+    if (borg == 'b') {
+      id = idBoys.getElementsByClassName('form-select')[0].value
+    } else {
+      id = idGirls.getElementsByClassName('form-select')[0].value
+    }
+    id = Number(id) + Number(floor.getElementsByClassName('form-select')[0].value)
+    console.log(id);
+    numCells = rooms[id]
+
     if (numCells == 0) {
       alert("Please select the number of rooms");
       return
     }
+      console.log(id, numCells);
       cellsList = range(numCells);
       console.log(cellsList);
-      createGrid(cellsList, 'rooms_grid');
+      // createGrid(cellsList, 'rooms_grid');
+      createTable(listToMatrix(range(numCells), 4))
   });
 </script>
 {% endblock %}
