@@ -1,0 +1,40 @@
+{% extends 'admin.html' %}
+
+{% block body %}
+<div class="content">
+<form action="/approvals" style="padding-left: 4em;padding-right: 4em;padding-bottom: 4em;padding-top: 0em;">
+    <center><h4>Edit {{info.name}}'s Details</h4></center>
+    <hr>
+    <label for="name">Name :</label>
+    <input class="form-control" type="text" name="name" id="name" value="{{info.name}}" disabled>
+    <br>
+    <label for="email">Email :</label>
+    <input class="form-control" type="text" name="email" id="email" value="{{info.email}}" disabled>
+    <br>
+    <label for="phone">Phone :</label>
+    <input class="form-control" type="text" name="phone" id="phone" value="{{info.phone}}" disabled>
+    <br>
+    <label for="room">Room Number :</label>
+    <input class="form-control" type="text" name="room" id="room" value="{{info.room}}" disabled>
+    <br>
+    <label for="hostel">Hostel :</label>
+    <input class="form-control" type="text" name="hostel" id="hostel" value="{{info.hostel}}" disabled>
+    <br>
+    <label for="pr_number">PR Number :</label>
+    <input class="form-control" type="text" name="pr_number" id="pr_number" value="{{info.pr_number}}" disabled>
+    <br>
+    <label for="year">Year :</label>
+    <input class="form-control" type="text" name="year" id="year" value="{{info.year}}" disabled>
+    <br>
+    <label for="semester">Semester :</label>
+    <input class="form-control" type="text" name="semester" id="semester" value="{{info.semester}}" disabled>
+    <br>
+    <label for="department">Department :</label>
+    <input class="form-control" type="text" name="department" id="department" value="{{info.department}}" disabled>
+    <br>
+    <input type="submit" value="Back" class="btn btn-primary">
+    </div>
+</form>
+<hr>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'admin.html' %}
+
+{% block body %}
+<br><br><br>
+<div style="padding: 4em;">
+  <h2 style="font-weight:500">Approval List</h2>
+  <hr>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Department</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for student in students%}
+      <tr>
+        <td>{{student.name}}</td>
+        <td>{{student.email}}</td>
+        <td>{{student.phone}}</td>
+        <td>{{student.department}}</td>
+        <td><a href="/approvals/moreinfo/{{student.id}}" class="btn btn-primary btn-small">More Info <i class="fa fa-info"
+              aria-hidden="true"></i></a> <a href="/approvals/approve/{{ student.id }}"
+            class="btn btn-danger btn-small">Approve <i class="fa fa-check" aria-hidden="true"></i></a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}
