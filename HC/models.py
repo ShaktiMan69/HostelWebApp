@@ -48,3 +48,11 @@ class Student(db.Model):
     def __repr__(self):
         return f'''Student {self.id} {self.warden_id} {self.is_approved} {self.hostel_id} {self.room_num} {self.name} {self.address}{self.phone} {self.email}
                             {self.parent_name} {self.parent_phone} {self.year} {self.semester} {self.pr_number} {self.department} {self.photo} {self.id_proof}'''
+
+class Rooms(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    warden_id = db.Column(db.Integer, nullable=False)
+    hostel_id = db.Column(db.Integer, nullable=False)
+    room_num = db.Column(db.Integer, nullable=False)
+    is_occupied = db.Column(db.Boolean, nullable=False, default=False)
+    n_students = db.Column(db.Integer, nullable=False, default=0)
