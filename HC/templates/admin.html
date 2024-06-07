@@ -25,7 +25,28 @@
           Admin Dashboard
         </a>
       </div>
-      {% block style %} {% endblock %}
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li>
+            <a href="/admin">
+              <i class="nc-icon nc-single-02"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li>
+            <a href="/students">
+              <i class="nc-icon nc-bank"></i>
+              <p>Students List</p>
+            </a>
+          </li>
+          <li>
+            <a href="/approvals">
+              <i class="nc-icon nc-bank"></i>
+              <p>Approval List</p>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="main-panel">
       <!-- Navbar -->
@@ -68,6 +89,19 @@
       // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
       demo.initChartsPages();
     });
+
+    $(function(){
+    var current = location.pathname;
+    var ulChildren = document.getElementsByClassName('nav')[0].children;                
+    var childrenLength = ulChildren.length;
+
+    for (var i = 0; i < childrenLength; i++) {
+      if (ulChildren[i].children[0].getAttribute('href') === current) {
+        ulChildren[i].classList.add('active');
+      }
+    }
+})
+
   </script>
 </body>
 

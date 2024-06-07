@@ -76,10 +76,19 @@ def admin():
 
 @login_required
 @auth.route('/students')
-def hostel():
+def students():
     if current_user.is_authenticated:
-        students = Student.query.all()
+        students = Student.query.where(Student.is_approved == True, Student.warden_id == current_user.id)
         return render_template('stdlist.html', students=students, current_user=current_user.name)
+    
+    return redirect(url_for('auth.login'))
+
+@login_required
+@auth.route('/approvals')
+def approvals():
+    if current_user.is_authenticated:
+        students = Student.query.where(Student.is_approved == False, Student.warden_id == current_user.id)
+        return render_template('approvalist.html', students=students, current_user=current_user.name)
     
     return redirect(url_for('auth.login'))
 
@@ -92,7 +101,7 @@ def delete(id):
         db.session.commit()
         return redirect('/students')
     return redirect(url_for('auth.login'))
-    
+
 @login_required
 @auth.route('/student/edit/<int:id>', methods=['GET', 'POST'])
 def update(id):
@@ -118,4 +127,24 @@ def update(id):
         else:
             return render_template('edit-student.html', info=info, current_user=current_user.name)
         
+    return redirect(url_for('auth.login'))
+    
+
+@login_required
+@auth.route('/approvals/moreinfo/<int:id>', methods=['GET', 'POST'])
+def moreinfo(id):
+    if current_user.is_authenticated:
+        info = Student.query.get_or_404(id)
+        return render_template('moreinfo.html', info=info, current_user=current_user.name)
+        
+    return redirect(url_for('auth.login'))
+
+@login_required
+@auth.route('/approvals/approve/<int:id>', methods=['GET', 'POST'])
+def approve(id):
+    if current_user.is_authenticated:
+        student = Student.query.get_or_404(id)
+        student.is_approved = True
+        db.session.commit()
+        return redirect('/approvals')
     return redirect(url_for('auth.login'))

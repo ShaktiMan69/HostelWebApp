@@ -27,6 +27,7 @@ class Hostel(db.Model):
 
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    is_approved = db.Column(db.Boolean, nullable=False, default=False)
     warden_id = db.Column(db.Integer, nullable=False)
     hostel_id = db.Column(db.Integer, nullable=False)
     password = db.Column(db.Integer, nullable=False)
@@ -45,5 +46,5 @@ class Student(db.Model):
     id_proof = db.Column(db.String(100), nullable=True)
     
     def __repr__(self):
-        return f'''Student {self.id} {self.warden_id} {self.hostel_id} {self.room_num} {self.name} {self.address}{self.phone} {self.email}
+        return f'''Student {self.id} {self.warden_id} {self.is_approved} {self.hostel_id} {self.room_num} {self.name} {self.address}{self.phone} {self.email}
                             {self.parent_name} {self.parent_phone} {self.year} {self.semester} {self.pr_number} {self.department} {self.photo} {self.id_proof}'''
