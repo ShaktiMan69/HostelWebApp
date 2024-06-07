@@ -77,7 +77,6 @@ function createTable(tableData, containerId) {
   });
 
   table.appendChild(tableBody);
-  document.body.appendChild(table);
 }
 
 
@@ -193,113 +192,44 @@ function createGrid(rows, columns, containerId) {
   class="container tw-bg-gray-300 tw-rounded-lg p-2 text-light text-center"
   style="max-width: 700px"
 >
-  <div class="container text-center" id="rooms_grid">
-    <div class="row row-cols-4 p-2">
-      <div class="col">
-        <button
-          type="button"
-          class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
-          data-bs-toggle="modal" data-bs-target="#exampleModal"
-        >
-          1
-        </button>
-      </div>
-      <div class="col">
-        <button
-          type="button"
-          class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
-        >
-          2
-        </button>
-      </div>
-      <div class="col">
-        <button
-          type="button"
-          class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
-        >
-          3
-        </button>
-      </div>
-      <div class="col">
-        <button
-          type="button"
-          class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
-        >
-          4
-        </button>
-      </div>
-    </div>
-    <div class="row row-cols-4 p-2">
-      <div class="col">
-        <button
-          type="button"
-          class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
-          disabled
-        >
-          5
-        </button>
-      </div>
-      <div class="col">
-        <button
-          type="button"
-          class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
-        >
-          6
-        </button>
-      </div>
-      <div class="col">
-        <button
-          type="button"
-          class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
-        >
-          7
-        </button>
-      </div>
-      <div class="col">
-        <button
-          type="button"
-          class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
-        >
-          8
-        </button>
-      </div>
-    </div>
-    <div class="row row-cols-4 p-2">
-      <div class="col">
-        <button
-          type="button"
-          class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
-        >
-          9
-        </button>
-      </div>
-      <div class="col">
-        <button
-          type="button"
-          class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
-        >
-          10
-        </button>
-      </div>
-      <div class="col">
-        <button
-          type="button"
-          class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
-        >
-          11
-        </button>
-      </div>
-      <div class="col">
-        <button
-          type="button"
-          class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
-        >
-          12
-        </button>
+    <div class="container text-center">
+      <div class="row row-cols-4 p-2"  id="rooms_grid">
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+            data-bs-toggle="modal" data-bs-target="#exampleModal"
+          >
+            1
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            2
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            3
+          </button>
+        </div>
+        <div class="col">
+          <button
+            type="button"
+            class="btn tw-bg-gradient-to-r tw-from-green-500 tw-via-green-600 tw-to-green-700 hover:tw-bg-gradient-to-br tw-text-white tw-font-medium disabled:tw-from-red-500 disabled:tw-via-red-600 disabled:tw-to-red-700 disabled:tw-cursor-not-allowed room-btn"
+          >
+            4
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 
@@ -384,7 +314,7 @@ function createGrid(rows, columns, containerId) {
       cellsList = range(numCells);
       console.log(cellsList);
       // createGrid(cellsList, 'rooms_grid');
-      createTable(listToMatrix(range(numCells), 4))
+      createTable(listToMatrix(range(numCells), 4), 'rooms_grid')
   });
 </script>
 {% endblock %}
