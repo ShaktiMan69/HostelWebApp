@@ -1,11 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
-      "./HC/templates/*.html",
-      "./HC/static/assets/js/*.js"
-    ],
-    theme: {
-      extend: {},
+  prefix: "tw-",
+  content: ["./**/*.{html,js,css}"],
+  theme: {
+    extend: {
+      colors: {
+        magnolia: "#640D6B",
+      },
     },
-    plugins: [],
-  }
+  },
+  plugins: [],
+};
