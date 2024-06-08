@@ -1,8 +1,9 @@
+import json
 from flask import Blueprint, request
 from werkzeug.security import generate_password_hash
-from .models import Student
+from .models import Student, Rooms
 
-api = Blueprint('auth', __name__)
+api = Blueprint('api', __name__)
 
 @api.route('/api/get_user_name', methods=['POST'])
 def get_user_name():
@@ -18,3 +19,16 @@ def get_user_name():
         return 'Email or Password is invalid'
     return 'Only POST'
 
+@api.route('/api/get_rooms_info', methods=['POST'])
+def get_rooms_info():
+    print(request.json)
+    if request.method == 'POST':
+        if 'hostel_id' in request.json and 'gender' in request.json and 'floor' in request.json:
+            hostel_id = request.json['hostel_id']
+            gender = request.json['gender']
+            floor = request.json['floor']
+
+            print(hostel_id, gender, floor)
+            return json.dumps([r.as_dict() for r in Rooms.query.filter_by(hostel_id=hostel_id, gender=gender, floor_num=floor).all()])
+
+        return 'All fields are required'
