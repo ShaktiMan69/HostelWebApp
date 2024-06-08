@@ -2,8 +2,8 @@ from pathlib import Path
 import shutil
 from glob import glob
 
-hostels = {'Boy': [1,2,3], 'Girl': [4,5]}
-for gender in ['Boy', 'Girl']:
+hostels = {'b': [1,2,3], 'g': [4,5]}
+for gender in ['b', 'g']:
     for hostel_num in hostels[gender]:
         for floor_num in range(1, 3):
             for room_num in range(1, 27): # TODO currently hardcoded , assuems fixed number of rooms for each hostel at a floor

@@ -8,7 +8,16 @@ with app.app_context():
     wId = 1
     for n_rooms in n_rooms_in_each_hostel:
         for i in range(1, n_rooms+1):
-            room = Rooms(warden_id=wId, hostel_id=wId, room_num=i)
+            if wId > 6:
+                gender = 'g'
+            else:
+                gender = 'b'
+            
+            if i % 2 == 0:
+                floor = 0
+            else:
+                floor = 1
+            room = Rooms(warden_id=wId, hostel_id=wId, room_num=i, gender=gender, floor_num=floor)
             db.session.add(room)
         wId += 1
 

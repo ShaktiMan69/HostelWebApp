@@ -1,3 +1,4 @@
+import json
 from . import db
 from flask_login import UserMixin
 
@@ -53,6 +54,17 @@ class Rooms(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     warden_id = db.Column(db.Integer, nullable=False)
     hostel_id = db.Column(db.Integer, nullable=False)
+    gender = db.Column(db.String(1), nullable=False)
+    floor_num = db.Column(db.Integer, nullable=False)
     room_num = db.Column(db.Integer, nullable=False)
     is_occupied = db.Column(db.Boolean, nullable=False, default=False)
     n_students = db.Column(db.Integer, nullable=False, default=0)
+
+    def __repr__(self):
+        return f"Room {self.id} {self.warden_id} {self.hostel_id} {self.room_num} {self.is_occupied} {self.n_students}"
+
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+    
+    def as_json(self):
+        return json.dumps(self.as_dict())
