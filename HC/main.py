@@ -6,8 +6,6 @@ import os
 from .models import Student, Hostel
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash
-from RandomWordGenerator import RandomWord
-rw = RandomWord(max_word_size=16, constant_word_size=True, include_digits=True)
 
 # Reset Database
 # with app.app_context():
@@ -28,7 +26,7 @@ def contactus():
 
 @main.route('/rooms')
 def rooms():
-    rooms_info = [x[0] for x in Hostel.query.with_entities(Hostel.noccupied_rooms).all()]
+    rooms_info = [x[0] for x in Hostel.query.with_entities(Hostel.nrooms).all()]
     return render_template('rooms.html', page_name='Rooms', rooms_info=rooms_info)
 
 def chunks(lst, n):
