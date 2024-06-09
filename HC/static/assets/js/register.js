@@ -44,7 +44,7 @@ function validateForm() {
 
 function fillReview() {
     // Get form data
-        var reviewFields = ['name', 'address', 'phone', 'email', 'parent_name', 'parent_phone', 'year', 'semester', 'pr_number', 'department'];
+        var reviewFields = ['name', 'address', 'phone', 'email', 'parent_name', 'parent_phone', 'year', 'semester', 'pr_number', 'department', 'gender', 'room_num', 'floor_num', 'hostel_num'];
 
         for (var i = 0; i < reviewFields.length; i++) {
             var field = reviewFields[i];
@@ -55,8 +55,14 @@ function fillReview() {
         }
   }
 
+function hideModal(){
+    if (document.querySelector('.page.active').getAttribute('pageno') == '2'){
+        $('#'+document.getElementsByClassName('modal fade')[0].id).modal('hide');
+    }
+}
 
 function nextPage() {
+    hideModal();
     if (validateForm()) {
         var currentPage = document.querySelector('.page.active');
         var nextPage = currentPage.nextElementSibling;
@@ -85,11 +91,14 @@ function nextPage() {
     updateProgressBar();
 }
 function prevPage() {
+    hideModal();
+
   var currentPage = document.querySelector('.page.active');
   var prevPage = currentPage.previousElementSibling;
   currentPage.classList.remove('active');
   prevPage.classList.add('active');
   updateProgressBar();
+
 }
 
 function submitForm() {

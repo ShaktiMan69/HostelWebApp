@@ -24,10 +24,6 @@ def contactus():
     return 'Contact Us'
     # return render_template('contactus.html')
 
-@main.route('/rooms')
-def rooms():
-    return render_template('rooms.html', page_name='Rooms')
-
 def chunks(lst, n):
     """Yield successive n-sized chunks from lst."""
     for i in range(0, len(lst), n):
@@ -81,8 +77,13 @@ def register():
             path_photo = save_file(form.photo.name, pr_number=pr_number)
             path_id_proof = save_file(form.id_proof.name, pr_number=pr_number)
 
+            hostel_id = form.hostel_num.data.replace('ID','')
+            room_num = form.room_num.data
+
+            print(request.form)
+
             # Save the data to the database
-            registration_data = Student(warden_id='', hostel_id='', room_num='', password=generate_password_hash(password),name=name, address=address, phone=phone, email=email,
+            registration_data = Student(warden_id=hostel_id, hostel_id=hostel_id, room_num=room_num, password=generate_password_hash(password),name=name, address=address, phone=phone, email=email,
                                                 parent_name=parent_name, parent_phone=parent_phone, year=year,
                                                 semester=semester, pr_number=pr_number, department=department,
                                                 photo=path_photo, id_proof=path_id_proof)

@@ -21,3 +21,6 @@ class RegistrationForm(FlaskForm):
     department = SelectField('Department', choices=[('MECH'), ('COMP'), ('ETC'), ('ENE'), ('CIVIL'), ('VLSI'), ('IT')])
     photo = FileField('Upload Photo', validators=[InputRequired()])
     id_proof = FileField('Upload ID Proof', validators=[InputRequired()])
+
+    hostel_num = StringField('Hostel Num')
+    room_num = StringField('Room Num') # Manually Done with JS

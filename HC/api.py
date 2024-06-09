@@ -29,6 +29,8 @@ def get_rooms_info():
             floor = request.json['floor']
 
             print(hostel_id, gender, floor)
-            return json.dumps([r.as_dict() for r in Rooms.query.filter_by(hostel_id=hostel_id, gender=gender, floor_num=floor).all()])
+            out = json.dumps([r.as_dict() for r in Rooms.query.filter_by(hostel_id=hostel_id, gender=gender, floor_num=floor).all()])
+            print(out)
+            return out
 
         return 'All fields are required'
