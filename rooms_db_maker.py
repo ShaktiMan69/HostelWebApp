@@ -27,7 +27,8 @@ with app.app_context():
         print(wId, gender, floor, start, start+n_rooms)
         # input()
         for i in range(start, start+n_rooms):
-            room = Rooms(warden_id=wId, hostel_id=wId, room_num=i, gender=gender, floor_num=floor, is_occupied=bool(random.getrandbits(1)))
+            b = bool(random.getrandbits(1))
+            room = Rooms(warden_id=wId, hostel_id=wId, room_num=i, gender=gender, floor_num=floor, is_occupied=b, n_students=b)
             db.session.add(room)
 
         prev_rooms = n_rooms
