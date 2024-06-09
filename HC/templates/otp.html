@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<link href="assets/css/register.css" rel="stylesheet">
+<div class="rcontainer">
+  <form action="/otp" method="post">
+    <div class="page active">
+      <h2>Email Verification</h2>
+      <div class="input-group">
+        <label type="text">{{email}}</label>
+        <input id="otp" type="text" placeholder="Enter OTP">
+      </div>
+      <button class="button tw-bg-gradient-to-r text-center tw-gap-5 tw-from-blue-500 tw-via-blue-600 tw-to-blue-700 hover:tw-bg-gradient-to-br" onclick="submitForm()">Submit</button>
+    </div>
+  </form>
+</div>
+{% endblock %}

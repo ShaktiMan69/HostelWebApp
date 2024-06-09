@@ -4,7 +4,7 @@ from flask import Blueprint, request, render_template, url_for, redirect, flash
 from flask_login import login_user, login_required, current_user, logout_user
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import Warden, Hostel, Student
+from .models import Warden, Hostel, Student, Rooms
 
 auth = Blueprint('auth', __name__)
 
@@ -66,10 +66,11 @@ def logout():
 @auth.route('/admin')
 def admin():
     if current_user.is_authenticated:
-        hostel_details = Hostel.query.where(Hostel.warden_id == current_user.id).first() # only show the assigned hostel details to the assigned warden
-        students = Student.query.where(Student.warden_id == current_user.id).all()
-            
-        return render_template("dashboard.html", students=students, hostel=hostel_details, current_user = current_user.name)
+        hostel_details = Rooms.query.where(Rooms.warden_id == current_user.id).all() # only show the assigned hostel details to the assigned warden
+        noccupied_rooms = len([r for r in hostel_details if r.is_occupied == True])
+        print(hostel_details)
+        nstudents = sum([r.n_students for r in hostel_details])
+        return render_template("dashboard.html", nrooms=len(hostel_details), noccupied_rooms=noccupied_rooms, nstudents=nstudents,current_user = current_user.name)
     
     return redirect(url_for('auth.login'))
 
@@ -108,19 +109,8 @@ def update(id):
     if current_user.is_authenticated:
         info = Student.query.get_or_404(id)
         if request.method == 'POST':
-            info.warden_id = request.form['warden_id']
-            info.hostel_id = request.form['hostel_id']
-            info.password = request.form['password']
-            info.room_num = request.form['room_num']
-            info.name = request.form['name']
-            info.address = request.form['address']
-            info.phone = request.form['phone']
-            info.email = request.form['email']
-            info.parent_name = request.form['parent_name']
-            info.parent_phone = request.form['parent_phone']
             info.year = request.form['year']
             info.semester = request.form['semester']
-            info.pr_number = request.form['pr_number']
             info.department = request.form['department']
             db.session.commit()
             return redirect('/students')

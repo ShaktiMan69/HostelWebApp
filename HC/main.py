@@ -6,6 +6,8 @@ import os
 from .models import Student, Hostel, Rooms
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash
+from sendemail import send_email
+from random_otp.generator import generate_alphanumeric_otp
 
 # Reset Database
 # with app.app_context():
@@ -23,6 +25,17 @@ def index():
 def contactus():
     return 'Contact Us'
     # return render_template('contactus.html')
+
+@main.route('/otp', methods=['GET', 'POST'])
+def otp():
+    if request.method == 'POST':
+        print(request.data)
+        otp = request.args.get('otp')
+        # if otp == Student
+        return otp
+
+    email = request.args.get('email') or ''
+    return render_template("otp.html", page_name='Email Verification', email=email)
 
 def chunks(lst, n):
     """Yield successive n-sized chunks from lst."""
@@ -55,6 +68,7 @@ def save_file(file_field, pr_number):
 
             return path
 
+
 @main.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm(request.form)
@@ -80,17 +94,20 @@ def register():
             hostel_id = form.hostel_num.data.replace('ID','')
             room_num = form.room_num.data
 
-            print(request.form)
+            email_otp = generate_alphanumeric_otp(64)
 
             # Save the data to the database
             registration_data = Student(warden_id=hostel_id, hostel_id=hostel_id, room_num=room_num, password=generate_password_hash(password),name=name, address=address, phone=phone, email=email,
                                                 parent_name=parent_name, parent_phone=parent_phone, year=year,
                                                 semester=semester, pr_number=pr_number, department=department,
-                                                photo=path_photo, id_proof=path_id_proof)
+                                                photo=path_photo, id_proof=path_id_proof, email_otp=email_otp)
             db.session.add(registration_data)
             db.session.commit()
 
-            return f'Registered Successfully | Use the Email {email} and Password {password} for the app'
+            out = f'Registered Successfully | Application will be approved by the Warden | Use the Email {email} and Password {password} for the app'
+            send_email(email, content=out + f' | Use the OTP {email_otp} for Verification')
+            return redirect(url_for('main.otp', email=email))
+        
         return 'Something Broke'
     return render_template('register.html', form=form, page_name='Register')
 

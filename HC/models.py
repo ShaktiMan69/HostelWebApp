@@ -37,6 +37,8 @@ class Student(db.Model):
     address = db.Column(db.String(100), nullable=False)
     phone = db.Column(db.String(10), nullable=False)
     email = db.Column(db.String(100), nullable=False)
+    valid_email = db.Column(db.Boolean, nullable=False, default=False)
+    email_otp = db.Column(db.Integer, nullable=False)
     parent_name = db.Column(db.String(100), nullable=False)
     parent_phone = db.Column(db.String(10), nullable=False)
     year = db.Column(db.String(10), nullable=False)

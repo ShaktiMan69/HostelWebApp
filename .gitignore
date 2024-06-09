@@ -4,3 +4,4 @@ instance/*
 HC/static/assets/img/rooms/*
 HC/static/assets/img/rooom/*
 instance/hosteldata.db
+__pycache__/*
